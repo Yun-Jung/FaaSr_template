@@ -3,7 +3,7 @@ name: function2
 # Controls when the action will run.
 on:
   workflow_run:
-    workflows: ["function2"]
+    workflows: ["function1"]
     types:
       - completed
 
