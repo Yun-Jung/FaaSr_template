@@ -2,11 +2,10 @@ name: function2
 
 # Controls when the action will run.
 on:
-  push:
+  workflow_run:
+    workflows: ["function2"]
     types:
-      - created
-    paths:
-      - 'function2/**'
+      - completed
 
 jobs: 
   function2:
