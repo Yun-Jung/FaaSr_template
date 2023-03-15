@@ -2,7 +2,7 @@ name: function2
 
 # Controls when the action will run.
 on:
-  push:
+  create:
     paths:
       - 'function2/c.csv'
 
