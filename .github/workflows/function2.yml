@@ -3,8 +3,8 @@ name: function2
 # Controls when the action will run.
 on:
   push:
-    paths:
-    - './function2/c.csv'
+    paths-ignore:
+      - 'function2/c.csv'
 
 jobs: 
   function1:
