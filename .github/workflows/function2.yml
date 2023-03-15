@@ -2,7 +2,9 @@ name: function2
 
 # Controls when the action will run.
 on:
-  create:
+  push:
+    types:
+      - created
     paths:
       - 'function2/**'
 
