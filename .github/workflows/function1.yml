@@ -48,8 +48,8 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add ./function2/c.csv
           git commit -m "trigger_from_function1-$(date '+%Y-%m-%d')"
-          git branch master
-          git push --force origin master
+          git branch main
+          git push --force origin main
           
       #- name: Copy files to s3 buckets
       #  run: |
