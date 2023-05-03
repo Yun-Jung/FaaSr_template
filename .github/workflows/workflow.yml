@@ -81,7 +81,7 @@ jobs:
     steps:
       - name: sleep
         run: |
-          sleep 2m
+          sleep 30
 
   f2:
     needs: [idle, f1, f1_wait]
