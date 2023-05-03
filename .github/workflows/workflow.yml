@@ -22,7 +22,7 @@ jobs:
         prefix: payload
         
     - run: |
-        echo ${{ env.InvocationID }}
+        echo ${{ env.payload_InvocationID }}
     
   f1:
     needs: idle
@@ -43,8 +43,8 @@ jobs:
           type = s3
           provider = Minio
           endpoint = https://s3.flare-forecast.org
-          access_key_id = ${{ secrets.s3_USERNAME }}
-          secret_access_key = ${{ secrets.s3_PASSWORD }}
+          access_key_id = ${{ secrets.S3_USERNAME }}
+          secret_access_key = ${{ secrets.S3_PASSWORD }}
         disable_base64: true
       
     - run: 'rclone copy s3flare:wvwa-graphs/scripts/wvwa-generate-graphs.R ${{ github.workspace }}/function1'
