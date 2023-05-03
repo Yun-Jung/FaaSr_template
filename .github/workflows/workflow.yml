@@ -31,12 +31,6 @@ jobs:
       with:
         filename: 'sequence.json'
         prefix: payload
-        
-    - name: Check
-      run: |
-        echo ${{ env.payload_DataStores_S3_A_Type }}
-        echo ${{ env.payload_DataStores_S3_A_Provider }}
-        echo ${{ env.payload_DataStores_S3_A_Endpoint }}
     
     - name: Setup Rclone
       uses: AnimMouse/setup-rclone@v1
@@ -63,7 +57,7 @@ jobs:
 
     - name: Run automatic prediction file
       run:  | 
-        docker run --rm -v ${{ github.workspace }}:/csv/ yjungku/faasr_test
+        docker run --rm -v ${{ github.workspace }}:/csv/ ${{ env.payload_ActionContainers_f1 }}
       
     - name: List function2 files
       run: ls ${{ github.workspace }}/function2
