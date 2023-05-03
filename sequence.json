@@ -43,7 +43,9 @@
   },
   "DataStores": {
     "S3_A": {
-      "Endpoint": "my_s3",
+      "type": "s3",
+      "provider": "Minio",
+      "Endpoint": "https://s3.flare-forecast.org",
       "Protocol": "https",
       "AccessKey": "000000000000000000000000",
       "SecretKey": "000000000000000000000000",
