@@ -65,13 +65,23 @@ jobs:
     - name: List function2 files
       run: ls ${{ github.workspace }}/function2
       
+    ## git add ./function2/c.csv
     - name: Commit files
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add ./function2/c.csv
+        git add -a
         git commit -m "trigger_from_function1-$(date '+%Y-%m-%d-%T')"
         git push --force origin main
+  
+  f1_wait:
+    needs: idle
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: sleep
+        run: |
+          sleep 2m
 
   f2:
     needs: [idle, f1]
