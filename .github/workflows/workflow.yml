@@ -22,7 +22,9 @@ jobs:
         prefix: payload
         
     - run: |
-        echo ${{ env.payload_InvocationID }}
+        echo ${{ env.payload_DataStores_S3_A_Type }}
+        echo ${{ env.payload_DataStores_S3_A_Provider }}
+        echo ${{ env.payload_DataStores_S3_A_Endpoint }}
     
   f1:
     needs: idle
