@@ -40,9 +40,9 @@ jobs:
       with:
         rclone_config: |
           [s3flare]
-          type = s3
-          provider = Minio
-          endpoint = https://s3.flare-forecast.org
+          type = ${{ env.payload_DataStores_S3_A_Type }}
+          provider = ${{ env.payload_DataStores_S3_A_Provider }}
+          endpoint = ${{ env.payload_DataStores_S3_A_Endpoint }}
           access_key_id = ${{ secrets.S3_USERNAME }}
           secret_access_key = ${{ secrets.S3_PASSWORD }}
         disable_base64: true
