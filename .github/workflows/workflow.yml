@@ -20,11 +20,6 @@ jobs:
       with:
         filename: 'sequence.json'
         prefix: payload
-        
-    - run: |
-        echo ${{ env.payload_DataStores_S3_A_Type }}
-        echo ${{ env.payload_DataStores_S3_A_Provider }}
-        echo ${{ env.payload_DataStores_S3_A_Endpoint }}
     
   f1:
     needs: idle
@@ -36,6 +31,12 @@ jobs:
       with:
         ref: main
         fetch-depth: 1
+    
+    - name: Check
+      run: |
+        echo ${{ env.payload_DataStores_S3_A_Type }}
+        echo ${{ env.payload_DataStores_S3_A_Provider }}
+        echo ${{ env.payload_DataStores_S3_A_Endpoint }}
     
     - name: Setup Rclone
       uses: AnimMouse/setup-rclone@v1
