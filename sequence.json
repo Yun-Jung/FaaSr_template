@@ -5,41 +5,20 @@
 "FunctionList":{
         "F1":{
                 "FaaSServer":"ow_A",
-                "Actionname":"faasr",
+                "Actionname":"f1",
                 "Arguments":{
                         "input1":"input1.csv",
                         "input2":"input2.csv",
                         "output":"output1.csv"
                 },
-                "InvokeNext":["F3","F2"]
+                "InvokeNext":["F2"]
         },
         "F2":{
                 "FaaSServer":"ow_A",
-                "Actionname":"faasr",
+                "Actionname":"f2",
                 "Arguments":{
-                        "input1":"input1.csv",
-                        "input2":"output1.csv",
+                        "input":"output1.csv",
                         "output":"output2.csv"
-                },
-                "InvokeNext":["F4"]
-        },
-        "F3":{
-                "FaaSServer":"ow_A",
-                "Actionname":"faasr",
-                "Arguments":{
-                        "input1":"input2.csv",
-                        "input2":"output1.csv",
-                        "output":"output3.csv"
-                },
-                "InvokeNext":["F4"]
-        },
-        "F4":{
-                "FaaSServer":"ow_A",
-                "Actionname":"faasr",
-                "Arguments":{
-                        "input1":"output2.csv",
-                        "input2":"output3.csv",
-                        "output":"output4.csv"
                 }
         }
 },
