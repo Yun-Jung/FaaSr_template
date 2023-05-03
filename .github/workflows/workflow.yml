@@ -1,0 +1,98 @@
+name: FaaSr_workflow
+
+on:
+  workflow_dispatch
+
+jobs:
+
+  idle:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 1
+    
+    - name: JSON to variables
+      uses: rgarcia-phi/json-to-variables@v1.1.0
+      with:
+        filename: 'sequence.json'
+        prefix: payload
+        
+    - run: |
+      echo ${{ env.InvocationID }}
+    
+  f1:
+    needs: idle
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 1
+    
+    - name: Setup Rclone
+      uses: AnimMouse/setup-rclone@v1
+      with:
+        rclone_config: |
+          [s3flare]
+          type = s3
+          provider = Minio
+          endpoint = https://s3.flare-forecast.org
+          access_key_id = ${{ secrets.DOCKERHUB_USERNAME }}
+          secret_access_key = ${{ secrets.DOCKERHUB_PASSWORD }}
+        disable_base64: true
+      
+    - run: 'rclone copy s3flare:wvwa-graphs/scripts/wvwa-generate-graphs.R ${{ github.workspace }}/function1'
+    
+    - name: List function1 files
+        run: ls ${{ github.workspace }}/function1
+    
+    - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Run automatic prediction file
+        run:  | 
+          docker run --rm -v ${{ github.workspace }}:/csv/ yjungku/faasr_test
+      
+      - name: List function2 files
+        run: ls ${{ github.workspace }}/function2
+      
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ./function2/c.csv
+          git commit -m "trigger_from_function1-$(date '+%Y-%m-%d-%T')"
+          git push --force origin main
+
+  f2:
+    needs: idle, f1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          fetch-depth: 1
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+      
+      - name: Run automatic prediction file
+        run:  | 
+          docker run --rm hello-world
+      
+      - name: List function2 files
+        run: ls ${{ github.workspace }}/function2
