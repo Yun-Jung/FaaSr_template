@@ -18,7 +18,7 @@ jobs:
     - name: JSON to variables
       uses: rgarcia-phi/json-to-variables@v1.1.0
       with:
-        filename: 'test.json'
+        filename: 'sequence.json'
         prefix: payload
         
     - run: |
