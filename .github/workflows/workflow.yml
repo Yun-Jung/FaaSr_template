@@ -15,12 +15,6 @@ jobs:
           ref: main
           fetch-depth: 1
     
-    - name: JSON to variables
-      uses: rgarcia-phi/json-to-variables@v1.1.0
-      with:
-        filename: 'sequence.json'
-        prefix: payload
-    
   f1:
     needs: idle
     runs-on: ubuntu-latest
@@ -32,6 +26,12 @@ jobs:
         ref: main
         fetch-depth: 1
     
+    - name: JSON to variables
+      uses: rgarcia-phi/json-to-variables@v1.1.0
+      with:
+        filename: 'sequence.json'
+        prefix: payload
+        
     - name: Check
       run: |
         echo ${{ env.payload_DataStores_S3_A_Type }}
