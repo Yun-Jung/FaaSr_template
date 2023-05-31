@@ -55,8 +55,8 @@
     }
   },
   "ActionContainers": {
-    "f1": "yjungku/faasr_test",
-    "f2": "dockerhub_containerY",
-    "f3": "dockerhub_containerX"
+    "F1": "yjungku/faasr_test",
+    "F2": "dockerhub_containerY",
+    "F3": "dockerhub_containerX"
   }
 }
